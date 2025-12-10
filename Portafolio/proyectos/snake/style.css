@@ -1,0 +1,216 @@
+/* ======= Snake — Tema Neo-Glass (solo CSS) ======= */
+:root{
+  --bg-1: #060916;
+  --bg-2: #0b1230;
+  --glass: rgba(255,255,255,.06);
+  --glass-2: rgba(255,255,255,.08);
+  --stroke: rgba(255,255,255,.10);
+  --muted: #9db0d1;
+  --text: #eaf0ff;
+  --brand: #6ee7ff;      /* acento principal */
+  --brand-2: #7c4dff;    /* acento secundario */
+  --danger: #ff5d7a;     /* rojo suave */
+  --success: #40f3a8;    /* verde suave */
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  height:100%;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 600px at 20% -10%, #0b1a44 0%, transparent 60%),
+    radial-gradient(900px 600px at 120% 20%, #2a0b44 0%, transparent 60%),
+    linear-gradient(160deg, var(--bg-1), var(--bg-2));
+  overflow:hidden;
+}
+
+/* ======= Header ======= */
+.app-header{
+  position:sticky; top:0; z-index:5;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 20px;
+  backdrop-filter:saturate(110%) blur(8px);
+  background: linear-gradient(180deg, rgba(10,14,30,.75), rgba(10,14,30,.35));
+  border-bottom:1px solid var(--stroke);
+}
+.app-header h1{
+  font-weight:800; letter-spacing:.3px; font-size:22px;
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.controls{display:flex; gap:10px}
+
+/* ======= Botones ======= */
+.btn{
+  appearance:none; border:1px solid transparent; cursor:pointer;
+  padding:10px 14px; border-radius:12px; font-weight:600; font-size:14px;
+  color:#001018; background:linear-gradient(180deg, #9af3ff, var(--brand));
+  box-shadow: 0 6px 16px rgba(110,231,255,.25), inset 0 1px 0 rgba(255,255,255,.25);
+  transition: transform .08s ease, filter .2s ease, box-shadow .2s ease;
+}
+.btn:hover{filter:brightness(1.06)}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible{outline:2px solid #fff4; outline-offset:2px}
+
+.btn.btn-outline{
+  background:transparent; color:var(--text);
+  border-color:var(--stroke);
+  box-shadow:none;
+}
+.btn.btn-outline:hover{
+  border-color:#ffffff33; background:var(--glass-2)
+}
+
+/* ======= Layout ======= */
+.layout{
+  display:flex; align-items:flex-start; justify-content:center; gap:24px;
+  height:calc(100vh - 74px); padding:18px 20px 80px;
+}
+
+/* ======= Tarjeta del tablero ======= */
+.board-card{
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border:1px solid var(--stroke);
+  border-radius:var(--radius);
+  padding:16px; box-shadow:var(--shadow);
+  display:flex; flex-direction:column; align-items:center; gap:12px;
+  position:relative; isolation:isolate;
+}
+
+/* Brillos decorativos sutiles */
+.board-card::before,
+.board-card::after{
+  content:""; position:absolute; inset:auto; filter:blur(28px); z-index:-1;
+  border-radius:50%;
+}
+.board-card::before{ width:180px; height:180px; left:-40px; top:-40px; background: radial-gradient(var(--brand), transparent 60%); opacity:.25}
+.board-card::after{ width:220px; height:220px; right:-60px; bottom:-60px; background: radial-gradient(var(--brand-2), transparent 60%); opacity:.22}
+
+/* ======= Canvas ======= */
+#board{
+  display:block;
+  width:440px; height:440px;
+  border-radius:14px;
+  background:
+    linear-gradient(180deg,#060b1a,#050a17),
+    repeating-linear-gradient(0deg, transparent 0 21px, #0d1b3a 21px 22px),
+    repeating-linear-gradient(90deg, transparent 0 21px, #0d1b3a 21px 22px);
+  border:1px solid #17213f;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.02),
+    0 8px 24px rgba(0,0,0,.45);
+}
+
+/* ======= HUD ======= */
+.hud{
+  display:flex; flex-wrap:wrap; gap:14px 18px; align-items:center; justify-content:center;
+  margin-top:6px; font-size:14px; color:var(--muted);
+}
+.hud strong{
+  color:var(--text);
+  padding:2px 8px; border-radius:999px;
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  border:1px solid var(--stroke);
+}
+
+/* Tip de ayuda */
+.hint{
+  margin-top:2px; color:#a7b4d6; font-size:12.5px; opacity:.9;
+}
+
+/* ======= Sidebar / Top 10 ======= */
+.sidebar{
+  width:280px;
+  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  border:1px solid var(--stroke);
+  border-radius:var(--radius);
+  padding:14px 14px 10px; box-shadow:var(--shadow);
+}
+.sidebar h2{
+  font-size:16px; letter-spacing:.3px; font-weight:800;
+  display:flex; align-items:center; gap:8px; margin-bottom:8px;
+}
+.sidebar h2::after{
+  content:""; flex:1; height:1px; background:linear-gradient(90deg, #ffffff22, transparent);
+  border-radius:999px;
+}
+
+.leaderboard{
+  list-style:none; margin-top:4px;
+  display:grid; gap:6px;
+}
+.leaderboard li{
+  display:grid; grid-template-columns: 1.2fr auto; align-items:center; gap:10px;
+  padding:8px 10px; border-radius:12px; font-size:14px;
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border:1px solid var(--stroke);
+}
+.leaderboard li:nth-child(1){ border-color:#ffd16644; box-shadow:0 0 0 1px #ffd16622 inset}
+.leaderboard li:nth-child(1) span:first-child{ font-weight:800 }
+.leaderboard li span:last-child{
+  color:#dff6ff; font-weight:700; padding:2px 8px; border-radius:999px;
+  background:linear-gradient(180deg, rgba(110,231,255,.2), rgba(110,231,255,.05));
+  border:1px solid #9af3ff33;
+}
+.leaderboard li span:first-child{ color:#c9d6f3; overflow:hidden; text-overflow:ellipsis; white-space:nowrap }
+
+/* ======= Footer ======= */
+.app-footer{
+  position:fixed; left:0; right:0; bottom:0;
+  text-align:center; padding:10px 8px; font-size:12.5px; color:var(--muted);
+  border-top:1px solid var(--stroke);
+  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(10,14,30,.0), rgba(10,14,30,.45));
+}
+
+/* ======= <dialog> + tarjeta ======= */
+.modal{ border:none; padding:0; background:transparent }
+.modal::backdrop{ background: rgba(2,5,15,.65); backdrop-filter: blur(4px) }
+
+.modal-card{
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+  border:1px solid var(--stroke); color:var(--text);
+  border-radius:18px; padding:18px; min-width:300px;
+  box-shadow: var(--shadow);
+  animation: pop .18s ease-out;
+}
+@keyframes pop{ from{transform: translateY(6px) scale(.98); opacity:0} to{transform:none; opacity:1}}
+
+.modal-card h3{
+  font-size:18px; margin-bottom:6px;
+  background: linear-gradient(90deg, var(--danger), var(--brand-2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.field{ display:grid; gap:6px; margin:12px 0 }
+.field input{
+  background:#0a132d; color:var(--text);
+  border:1px solid #203057; border-radius:12px; padding:10px 12px;
+}
+.field input:focus{ outline:none; border-color:#7abaff; box-shadow:0 0 0 3px #7abaff33 }
+
+.modal-actions{ display:flex; justify-content:flex-end; gap:8px; margin-top:8px }
+
+/* ======= Accesibilidad / estados ======= */
+:focus-visible{ outline:2px dashed #7abaff; outline-offset:3px }
+.btn#btnStart{ background:linear-gradient(180deg, #88ffc8, var(--success)); color:#012016 }
+.btn#btnPause{ background:linear-gradient(180deg, #ffd3e0, var(--danger)); color:#2a0007 }
+.btn#btnReset.btn-outline{ border-color:#2a3557 }
+
+/* ======= Responsivo ======= */
+@media (max-width: 980px){
+  .layout{ flex-direction:column; align-items:center; height:auto; padding-bottom:110px }
+  .sidebar{ width:100%; max-width:520px }
+}
+@media (max-width: 480px){
+  #board{ width: 320px; height: 320px }
+  .app-header h1{ font-size:18px }
+  .btn{ padding:8px 12px }
+}
+
+/* ======= Respeto a usuarios con menos animación ======= */
+@media (prefers-reduced-motion: reduce){
+  *{ animation:none !important; transition:none !important }
+}

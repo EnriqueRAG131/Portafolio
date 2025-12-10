@@ -1,0 +1,403 @@
+/* ========================================== */
+/* 0. CONFIGURACIÓN GLOBAL Y RESET */
+/* ========================================== */
+:root {
+    --luigi-green: #4caf50;
+    --mario-red: #e53935;
+    --coin-gold: #ffc107;
+    --block-yellow: #ffeb3b;
+    --dark-blue: #1565c0;
+    --text-color: #333;
+    --font-primary: 'Helvetica Neue', Arial, sans-serif; 
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--dark-blue); 
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========================================== */
+/* 1. LAYOUT PRINCIPAL Y CABECERA */
+/* ========================================== */
+
+#casino-header {
+    background-color: var(--luigi-green);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-bottom: 5px solid #2e7d32;
+    z-index: 10;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo h1 {
+    font-size: 1.8em;
+    margin-right: 15px;
+    text-shadow: 2px 2px 0 var(--dark-blue);
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+#coin-display {
+    background-color: var(--coin-gold);
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 15px;
+    margin-left: 15px;
+    border: 3px solid #ff8f00;
+}
+
+#casino-container {
+    flex-grow: 1;
+    position: relative;
+    padding: 20px;
+    background: repeating-linear-gradient(
+        45deg,
+        #cfd8dc,
+        #cfd8dc 10px,
+        #eceff1 10px,
+        #eceff1 20px
+    ); 
+    overflow: hidden; 
+}
+
+/* Clases para el manejo de pantallas por JS */
+.hidden-screen {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.active-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100%;
+    transition: opacity 0.5s;
+    opacity: 1;
+}
+
+/* ========================================== */
+/* 2. LOBBY Y TRANSICIÓN */
+/* ========================================== */
+
+#lobby-screen h2 {
+    color: var(--dark-blue);
+    margin-bottom: 25px;
+    font-size: 2.2em;
+    text-shadow: 1px 1px 0 white;
+}
+
+#game-selection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    max-width: 1000px;
+}
+
+.game-card {
+    background-color: white;
+    border: 4px solid var(--luigi-green);
+    border-radius: 10px;
+    box-shadow: 6px 6px 0 var(--dark-blue);
+    width: 250px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 8px 8px 0 var(--mario-red);
+}
+
+.game-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain; 
+    margin-bottom: 10px;
+}
+
+/* Transición */
+#luigi-animation-area {
+    width: 100%;
+    height: 80px;
+    position: relative;
+    margin-bottom: 20px;
+    background: url('brick-road.png') repeat-x bottom; 
+    background-size: auto 50px;
+}
+
+#luigi-moving-sprite {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px; 
+    height: 80px;
+    transition: transform 1.5s linear; 
+}
+
+#table-list-container {
+    width: 80%;
+    max-width: 900px;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.game-table {
+    background-color: var(--block-yellow);
+    border: 3px solid var(--coin-gold);
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+/* ========================================== */
+/* 3. PANTALLA DE JUEGO (TAPETE) */
+/* ========================================== */
+
+#game-screen {
+    background-color: #1b5e20; 
+    color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+    width: 95%;
+    max-width: 1200px;
+}
+
+#game-interface {
+    min-height: 400px;
+    width: 100%;
+    margin: 20px 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ========================================== */
+/* 4. ESTILOS DEL MEMORAMA */
+/* ========================================== */
+
+.memorama-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 15px;
+    max-width: 500px;
+    margin-top: 20px;
+}
+
+.memorama-card {
+    background-color: transparent; 
+    border: none;
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    perspective: 1000px;
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 8px;
+    border: 4px solid var(--coin-gold);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: white;
+}
+
+.card-face.back {
+    background-color: var(--dark-blue); 
+    font-size: 3em; 
+}
+
+.card-face.front {
+    background-color: white;
+    color: var(--text-color);
+    transform: rotateY(180deg);
+    font-size: 1.2em; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.face-down {
+    transform: rotateY(0deg);
+}
+
+.face-up {
+    transform: rotateY(180deg);
+}
+
+.matched {
+    cursor: default;
+    pointer-events: none;
+}
+
+.matched .card-face.front {
+    background: linear-gradient(135deg, #b7e4c7 0%, #a7c7b7 100%);
+    box-shadow: 0 0 10px 2px #a7c7b7;
+    border: 3px solid #4caf50;
+}
+.matched .card-face.front img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    filter: none;
+    opacity: 1;
+}
+
+/* ========================================== */
+/* 5. ESTILOS DE LAS CARTAS DE PÓKER (MEJORADO) */
+/* ========================================== */
+
+.card-area {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    margin-top: 10px;
+    min-height: 120px;
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 8px;
+    width: 70px; 
+    height: 100px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    font-family: Arial, sans-serif;
+    position: relative; /* Para la superposición de datos */
+}
+
+/* Muestra el valor de la carta (A, K, 10, etc.) en la esquina superior */
+.card::before {
+    content: attr(data-rank-symbol); 
+    font-weight: bold;
+    font-size: 1.1em;
+    line-height: 1;
+    /* Color basado en el palo, ajustado por JS */
+    color: inherit; 
+}
+
+/* Muestra el símbolo del palo en la esquina superior */
+.card::after {
+    content: attr(data-suit-symbol); 
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 1.2em;
+    line-height: 1;
+    /* Color basado en el palo, ajustado por JS */
+    color: inherit; 
+}
+
+/* El span interno contiene el texto alusivo completo, lo ocultamos/estilizamos */
+.card span {
+    display: block;
+    text-align: center;
+    font-size: 0.9em;
+    font-weight: bold;
+    line-height: 1;
+    padding-top: 25px; /* Empuja el texto hacia el centro */
+}
+
+/* Clases para identificar el color del palo (Tréboles y Espadas) */
+.card span[style*="black"], 
+.card[data-suit-symbol="♠️"], 
+.card[data-suit-symbol="♣️"] {
+    color: black;
+}
+
+/* Clases para identificar el color del palo (Corazones y Diamantes) */
+.card span[style*="red"], 
+.card[data-suit-symbol="♥️"], 
+.card[data-suit-symbol="♦️"] {
+    color: var(--mario-red);
+}
+
+#hand-evaluation-display {
+    color: var(--coin-gold);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+
+/* ========================================== */
+/* 6. OTROS ESTILOS (Minijuego y Sprites) */
+/* ========================================== */
+
+.minigame-wrapper { color: white; }
+#coin-block { /* ... */ }
+
+/* Animaciones */
+.sprite-idle { background-image: url('luigi-idle.png'); }
+.sprite-walk { background-image: url('luigi-walk.gif'); animation: walk-run 1.5s forwards; }
+@keyframes walk-run { from { transform: translateX(0); } to { transform: translateX(calc(100vw - 60px)); } }
+.sprite-win { background-image: url('luigi-win.gif'); }
+.sprite-lose { background-image: url('luigi-lose.png');}
+.sprite-deal { background-image: url('luigi-deal.gif'); }
+.sprite-hit { transform: scale(1.1); transition: transform 0.1s; }
+
+button {
+    background-color: var(--mario-red);
+    color: white;
+    border: 3px solid var(--dark-blue);
+    /* ... (resto de estilos de botones) ... */
+}
+
+@media (max-width: 768px) {
+    /* ... (resto de media queries) ... */
+}

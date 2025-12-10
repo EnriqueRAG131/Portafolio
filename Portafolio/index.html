@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portafolio | Enrique Ramos Gallegos</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header class="hero">
+        <nav class="top-nav">
+            <span class="logo">ER</span>
+            <ul class="nav-links">
+                <li><a href="#about">Sobre mí</a></li>
+                <li><a href="#skills">Tecnologías</a></li>
+                <li><a href="#projects">Proyectos</a></li>
+            </ul>
+        </nav>
+
+        <section class="hero-content">
+            <div class="hero-text">
+                <p class="hero-eyebrow">Portafolio académico</p>
+                <h1>Hola, soy <span>Enrique Ramos Gallegos</span></h1>
+                <p class="hero-subtitle">
+                    Estudiante de Ingeniería en Tecnologías de la Información.
+                    En este portafolio muestro las actividades y proyectos más
+                    importantes de la materia, organizados por unidad y listos
+                    para poder interactuar con ellos directamente.
+                </p>
+            </div>
+        </section>
+    </header>
+
+    <main>
+        <!-- SOBRE MÍ -->
+        <section id="about" class="section about">
+            <h2>Sobre mí</h2>
+            <p>
+                Me interesa el desarrollo web y la programación de aplicaciones
+                interactivas. En los proyectos de esta materia he trabajado con
+                HTML, CSS, JavaScript, PHP, SQL y Git, enfocándome en crear
+                interfaces claras, funcionales y fáciles de usar.
+            </p>
+            <p>
+                Este portafolio recopila, como mínimo, una actividad y un
+                proyecto por unidad. Cada tarjeta permite abrir el proyecto en
+                una vista previa dentro de esta misma página o en una pestaña
+                completa, cumpliendo con lo que pide la actividad.
+            </p>
+        </section>
+
+        <!-- TECNOLOGÍAS -->
+        <section id="skills" class="section skills">
+            <h2>Tecnologías</h2>
+            <p class="section-description">
+                Tecnologías que he utilizado en los proyectos de esta materia.
+            </p>
+            <div class="skills-grid">
+                <div class="skill-pill">HTML5</div>
+                <div class="skill-pill">CSS</div>
+                <div class="skill-pill">JavaScript</div>
+                <div class="skill-pill">PHP</div>
+                <div class="skill-pill">SQL</div>
+                <div class="skill-pill">Git</div>
+            </div>
+        </section>
+
+        <!-- PROYECTOS -->
+        <section id="projects" class="section projects">
+            <h2>Proyectos Académicos</h2>
+            <p class="section-description">
+                Selecciona <strong>Vista previa</strong> para interactuar con el
+                proyecto dentro de esta página o <strong>Pestaña completa</strong>
+                para abrirlo en otra ventana.
+            </p>
+
+            <div class="projects-grid">
+
+                <!-- UNIDAD 1 - ACTIVIDAD: CALCULADORA -->
+                <article class="project-card">
+                    <span class="badge-unit">Unidad 1</span>
+                    <h3>Calculadora</h3>
+                    <p>
+                        Calculadora interactiva realizada con HTML, CSS y JavaScript.
+                        Permite realizar operaciones básicas en el navegador.
+                    </p>
+
+                    <div class="tag-row">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+
+                    <div class="project-actions">
+                        <button
+                            class="btn primary btn-preview"
+                            data-url="proyectos/calculadora/index.html">
+                            Vista previa
+                        </button>
+                        <a
+                            class="btn ghost"
+                            href="proyectos/calculadora/index.html"
+                            target="_blank"
+                            rel="noopener">
+                            Pestaña completa
+                        </a>
+                    </div>
+                </article>
+
+                <!-- UNIDAD 1 - PROYECTO: SNAKE -->
+                <article class="project-card">
+                    <span class="badge-unit">Proyecto U1</span>
+                    <h3>Snake Game</h3>
+                    <p>
+                        Juego tipo Snake programado con JavaScript y Canvas.
+                        El jugador controla la serpiente, evita colisiones y acumula
+                        puntos, aplicando lógica de juego y actualización de pantalla.
+                    </p>
+
+                    <div class="tag-row">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                    </div>
+
+                    <div class="project-actions">
+                        <button
+                            class="btn primary btn-preview"
+                            data-url="proyectos/snake/index.html">
+                            Vista previa
+                        </button>
+                        <a
+                            class="btn ghost"
+                            href="proyectos/snake/index.html"
+                            target="_blank"
+                            rel="noopener">
+                            Pestaña completa
+                        </a>
+                    </div>
+                </article>
+
+                <!-- UNIDAD 2 - ACTIVIDAD: PERIÓDICO -->
+                <article class="project-card">
+                    <span class="badge-unit">Unidad 2</span>
+                    <h3>Periódico Digital</h3>
+                    <p>
+                        Maquetado de una página tipo periódico utilizando HTML y CSS.
+                        Se aplican tipografías, columnas, jerarquía visual y estilos
+                        responsivos para simular un periódico en formato web.
+                    </p>
+
+                    <div class="tag-row">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                    </div>
+
+                    <div class="project-actions">
+                        <button
+                            class="btn primary btn-preview"
+                            data-url="proyectos/periodico/index.html">
+                            Vista previa
+                        </button>
+                        <a
+                            class="btn ghost"
+                            href="proyectos/periodico/index.html"
+                            target="_blank"
+                            rel="noopener">
+                            Pestaña completa
+                        </a>
+                    </div>
+                </article>
+
+                <!-- UNIDAD 2 - PROYECTO: CASINO -->
+                <article class="project-card">
+                    <span class="badge-unit">Proyecto U2</span>
+                    <h3>Casino Web</h3>
+                    <p>
+                        Proyecto de casino web desarrollado con HTML, CSS y JavaScript.
+                        Incluye interfaz interactiva, animaciones y lógica de juego
+                        para simular la experiencia de un mini casino en el navegador.
+                    </p>
+
+                    <div class="tag-row">
+                        <span class="tag">HTML</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">JavaScript</span>
+                    </div>
+
+                    <div class="project-actions">
+                        <button
+                            class="btn primary btn-preview"
+                            data-url="proyectos/casino/index.html">
+                            Vista previa
+                        </button>
+                        <a
+                            class="btn ghost"
+                            href="proyectos/casino/index.html"
+                            target="_blank"
+                            rel="noopener">
+                            Pestaña completa
+                        </a>
+                    </div>
+                </article>
+
+                <!-- SI DESPUÉS QUIERES UNIDAD 3 / 4, SOLO COPIAS OTRO ARTICLE Y CAMBIAS DATA-URL -->
+
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL DE VISTA PREVIA -->
+    <div id="preview-modal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Cerrar vista previa">&times;</button>
+            <iframe id="preview-frame" src="" title="Vista previa del proyecto"></iframe>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <small>
+            Portafolio académico de Enrique Ramos Gallegos · Programación Web
+        </small>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

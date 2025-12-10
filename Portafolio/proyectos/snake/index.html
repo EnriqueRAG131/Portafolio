@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snake</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>Snake</h1>
+    <div class="controls">
+      <button id="btnStart" class="btn">Iniciar</button>
+      <button id="btnPause" class="btn">Pausar</button>
+      <button id="btnReset" class="btn btn-outline">Reiniciar</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="board-card">
+      <canvas id="board" width="440" height="440"></canvas>
+      <div class="hud">
+        <div>Puntaje: <strong id="score">0</strong></div>
+        <div>Mejor: <strong id="best">0</strong></div>
+        <div>Velocidad: <strong id="speed">1x</strong></div>
+      </div>
+      <p class="hint">Usa flechas o WASD. Espacio = Pausa.</p>
+    </section>
+
+    <aside class="sidebar">
+      <h2>Top 10</h2>
+      <ol id="leaderboard" class="leaderboard"></ol>
+    </aside>
+  </main>
+
+  <dialog id="gameOverModal" class="modal">
+    <form method="dialog" class="modal-card" id="saveForm">
+      <h3>Perdiste</h3>
+      <p>Puntaje: <strong id="finalScore">0</strong></p>
+      <label class="field">Nombre (3–12 letras)
+        <input type="text" id="playerName" maxlength="12" minlength="3" required placeholder="Tu nombre">
+      </label>
+      <menu class="modal-actions">
+        <button value="cancel" class="btn btn-outline">Cerrar</button>
+        <button id="btnSave" class="btn" value="default">Guardar</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <footer class="app-footer">Hecho con HTML y JS</footer>
+  <script src="script.js"></script>
+</body>
+</html>

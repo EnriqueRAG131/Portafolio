@@ -1,0 +1,126 @@
+:root{
+  /* Softer, more natural palette */
+  --bg:#f3f6f8;
+  --bg2:#e8eef2;
+  --stroke:rgba(15,25,35,0.06);
+  --text:#102027;
+  --muted:#4f6b73;
+  --key:#ffffff;
+  --key-hover:#f1f5f7;
+  --key-op:#f7fafb;
+  --key-alt:#f4f6f7;
+  --key-eq:#5b8def;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter,Roboto,system-ui,-apple-system,Segoe UI,Ubuntu,Cantarell,Noto Sans,sans-serif;
+  color:var(--text);
+  background: linear-gradient(180deg,var(--bg),var(--bg2));
+}
+
+.wrap{
+  min-height:100%;
+  display:grid;
+  place-items:center;
+  padding:24px;
+}
+
+.calc{
+  width:100%;
+  max-width:420px;
+  background: linear-gradient(180deg, #ffffff, #fbfdff);
+  border:1px solid var(--stroke);
+  border-radius:16px;
+  box-shadow: 0 8px 30px rgba(16,32,40,0.08);
+  overflow:hidden;
+  backdrop-filter: blur(6px);
+}
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 18px 0 18px;
+}
+.brand{
+  font-weight:700;
+  letter-spacing:.4px;
+}
+.mini-hint{
+  font-size:12px;
+  color:var(--muted);
+  opacity:.9;
+}
+
+.display{
+  padding:18px 18px 10px 18px;
+}
+.history{
+  min-height:20px;
+  color:var(--muted);
+  font-size:14px;
+  text-align:right;
+  opacity:.9;
+}
+.screen{
+  margin-top:6px;
+  min-height:60px;
+  font-size:36px;
+  font-weight:700;
+  text-align:right;
+  letter-spacing:.2px;
+  word-break:break-word;
+  padding-left:6px;
+}
+
+.keys{
+  display:grid;
+  gap:10px;
+  grid-template-columns: repeat(4, 1fr);
+  padding:16px;
+  background: transparent;
+  border-top:1px solid var(--stroke);
+}
+
+button{
+  appearance:none;
+  border:none;
+  border-radius:12px;
+  background:var(--key);
+  color:var(--text);
+  font-size:18px;
+  padding:14px 12px;
+  cursor:pointer;
+  box-shadow: 0 6px 18px rgba(16,32,40,0.04), inset 0 -2px 0 rgba(0,0,0,0.03);
+  transition:transform .04s ease, filter .15s ease, background .15s ease;
+}
+button:hover{ filter:brightness(1.08) }
+button:active{ transform:translateY(1px) }
+
+button.op{ background:var(--key-op); color:var(--muted); font-weight:600 }
+button.alt{ background:var(--key-alt); color:var(--muted); font-weight:600 }
+button.eq{
+  background:var(--key-eq);
+  color:#fff;
+  grid-row: span 2;
+  box-shadow: 0 10px 24px rgba(91,141,239,0.18);
+}
+button.zero{ grid-column: span 2 }
+
+.shake{
+  animation:shake .25s linear 1;
+}
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-4px)}
+  50%{transform:translateX(4px)}
+  75%{transform:translateX(-2px)}
+  100%{transform:translateX(0)}
+}
+
+@media (max-width:380px){
+  .screen{ font-size:34px }
+  button{ font-size:17px; padding:14px 10px }
+}

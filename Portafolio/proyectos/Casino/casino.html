@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino Luigi: El Reino de los Juegos</title>
+    
+    <link rel="stylesheet" href="casino.css">
+</head>
+<body>
+
+    <header id="casino-header">
+        <div class="header-logo">
+            <h1>Casino Luigi</h1>
+            <div id="luigi-sprite" class="sprite-idle"></div> 
+        </div>
+        <div class="player-info">
+            <span id="player-name">Jugador Invitado</span>
+            <div id="coin-display">
+                <span class="coin-icon">💰</span>
+                <span id="player-coins">1000</span>
+            </div>
+        </div>
+    </header>
+
+    <main id="casino-container">
+
+        <section id="lobby-screen" class="active-screen">
+            <h2>Selecciona tu Aventura</h2>
+            <div id="game-selection">
+                
+                <div class="game-card" data-game="memorama">
+                    <img src="memorama.png" alt="Icono Memorama">
+                    <h3>Memorama</h3>
+                    <p>1 o 2 Jugadores | ¡Encuentra los pares de personajes!</p>
+                </div>
+
+                <div class="game-card" data-game="texas-holdem">
+                    <img src="texas.png" alt="Icono Poker Texas">
+                    <h3>Texas Hold'em</h3>
+                    <p>2 a 10 Jugadores | Apuesta y gana el pozo.</p>
+                </div>
+                
+                <div class="game-card" data-game="omaha">
+                    <img src="omaha.png" alt="Icono Poker Omaha">
+                    <h3>Omaha</h3>
+                    <p>2 a 10 Jugadores | Cuatro cartas en mano, dos para usar.</p>
+                </div>
+
+                <div class="game-card" data-game="minigame">
+                    <img src="bloquemonedas.png" alt="Icono Bloque de Monedas">
+                    <h3>Bloque de Monedas</h3>
+                    <p>¡El minijuego sorpresa de Luigi!</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="table-selection-screen" class="hidden-screen">
+            <div id="luigi-animation-area">
+                <div id="luigi-moving-sprite"></div>
+            </div>
+            <div id="table-list-container">
+                <h2>Mesas Disponibles (<span id="current-game-title"></span>)</h2>
+                <div id="table-list">
+                    </div>
+            </div>
+            <button id="back-to-lobby-btn">← Volver al Lobby</button>
+        </section>
+
+
+        <section id="game-screen" class="hidden-screen">
+            <h2 id="current-table-info"></h2>
+            
+            <div id="game-interface">
+                </div>
+            
+            <button id="exit-game-btn">Salir de la Mesa</button>
+        </section>
+
+    </main>
+    
+    <script src="casino.js"></script>
+
+</body>
+</html>

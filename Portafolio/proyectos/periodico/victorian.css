@@ -1,0 +1,72 @@
+:root{
+    --laton:#B68E54;
+    --cobre:#7B3F00;
+    --carbon:#1C1C1C;
+    --pergamino:#F4E4BC;
+    --vapor:#A8A9AD;
+}
+
+body{
+    background:var(--carbon);
+    margin:0;
+    padding:20px 0;
+    font-family:'Old Standard TT','Merriweather',serif;
+    color:#111;
+}
+
+.paper{
+    max-width:980px;
+    margin:0 auto;
+    background:linear-gradient(180deg,var(--pergamino) 0%,#fffef0 100%);
+    padding:28px;
+    border:4px solid var(--laton);
+    box-shadow:0 18px 30px rgba(0,0,0,0.45);
+}
+
+.masthead-vic{margin-bottom:12px}
+.masthead-wrap{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.vic-title{font-size:48px;color:var(--cobre);margin:0;font-family:'Old Standard TT',serif}
+.vic-sub{margin:0;color:var(--carbon);font-style:italic}
+.motto{color:var(--carbon)}
+.ornamental{border-top:2px dashed var(--laton);margin:12px 0}
+.vic-nav{display:flex;gap:14px;padding:6px 0}
+.vic-nav a{color:var(--cobre);text-decoration:none;font-weight:700}
+.vic-nav a:hover{color:var(--laton)}
+
+.breaking{display:flex;gap:12px;align-items:flex-start;margin-bottom:18px}
+.breaking-badge{background:var(--cobre);color:var(--pergamino);padding:8px 12px;font-weight:700;border-radius:4px;box-shadow:0 2px 0 rgba(0,0,0,0.12)}
+.breaking-items{display:flex;gap:12px;flex:1}
+.breaking-items article{background:rgba(0,0,0,0.02);padding:8px;border-left:2px solid var(--laton)}
+.breaking-items h4{margin:0 0 4px 0;font-family:'Merriweather',serif;color:var(--carbon)}
+.breaking-items p{margin:0;color:#333}
+
+.columns{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:18px}
+.column.lead h2{font-family:'Merriweather',serif;color:var(--cobre);margin-top:0;font-size:1.9rem}
+.by{color:#333;font-style:italic;margin-bottom:8px}
+.paragraph{color:#2b2b2b;text-align:justify;font-family:'Merriweather',serif;margin-bottom:12px}
+.drop{float:left;font-size:4.2rem;line-height:0.75;padding-right:10px;color:var(--cobre)}
+.section-rule{border:none;border-top:1px solid rgba(0,0,0,0.06);margin:12px 0}
+
+.side .box{background:linear-gradient(0deg,rgba(123,63,0,0.02),transparent);padding:10px;border-left:4px solid var(--laton);margin-bottom:12px}
+
+.news-grid h3{font-family:'Merriweather',serif;color:var(--cobre);margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.tile{padding:10px;border-bottom:1px dotted rgba(0,0,0,0.06)}
+.tile h4{margin:0 0 6px 0;color:#222;font-family:'Merriweather',serif}
+
+.paper-foot{text-align:center;color:rgba(0,0,0,0.6);padding-top:18px;margin-top:18px;border-top:1px solid rgba(0,0,0,0.04)}
+.ornament{color:var(--laton);font-size:20px}
+
+/* Bracket/World Cup visuals */
+.worldcup{margin-top:18px}
+.worldcup .bracket{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.worldcup .round{background:linear-gradient(180deg,#fff,#fffef4);padding:12px;border:2px solid rgba(0,0,0,0.06);}
+.worldcup .round h4{margin:0 0 8px 0;color:var(--cobre);font-family:'Merriweather',serif}
+.worldcup .round ul{list-style:none;padding:0;margin:0}
+.worldcup .round li{padding:6px 0;border-bottom:1px dashed rgba(0,0,0,0.06);}
+.worldcup .final{grid-column:1 / -1;background:linear-gradient(180deg,#fff8e6,#fffef4);padding:14px;border:3px solid var(--laton);text-align:center}
+.match-note{font-style:italic;color:#444;margin-top:6px}
+
+@media(max-width:880px){.columns{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.vic-title{font-size:30px}}
+
+@media print{body{background:#fff}.vic-nav,.breaking-badge{display:none}.paper{box-shadow:none;border:none}}

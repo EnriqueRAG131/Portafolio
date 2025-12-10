@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculadora</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="wrap">
+    <div class="calc">
+      <header class="topbar">
+        <div class="brand">Calculadora de Enrique</div>
+      </header>
+
+      <section class="display">
+        <div id="history" class="history"></div>
+        <div id="screen" class="screen">0</div>
+      </section>
+
+      <section class="keys">
+        <button data-act="ac" class="alt">AC</button>
+        <button data-act="del" class="alt">DEL</button>
+        <button data-val="(" class="op">(</button>
+        <button data-val=")" class="op">)</button>
+
+        <button data-val="÷" class="op">÷</button>
+        <button data-val="×" class="op">×</button>
+        <button data-val="7">7</button>
+        <button data-val="8">8</button>
+
+        <button data-val="9">9</button>
+        <button data-val="-" class="op">−</button>
+        <button data-val="4">4</button>
+        <button data-val="5">5</button>
+
+        <button data-val="6">6</button>
+        <button data-val="+" class="op">+</button>
+        <button data-val="1">1</button>
+        <button data-val="2">2</button>
+
+        <button data-val="3">3</button>
+        <button data-act="eq" class="eq">=</button>
+        <button data-val="0" class="zero">0</button>
+        <button data-val=".">.</button>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const screen = document.getElementById('screen');
+    const historyEl = document.getElementById('history');
+    const keys = document.querySelector('.keys');
+
+  const prettyToRaw = s => s.replace(/×/g,'*').replace(/÷/g,'/');
+  const rawToPretty = s => s.replace(/\*/g,'×').replace(/\//g,'÷');
+
+  const isOp = ch => ['+','-','×','÷'].includes(ch);
+
+    function setScreen(text){ screen.textContent = text || '0'; }
+    function getText(){ return screen.textContent; }
+
+    function addValue(v){
+      let t = getText();
+      if(t === '0' && /\d|\.|\(/.test(v)) t = '';
+      const last = t.slice(-1);
+
+      if(v === '(' && ( /\d/.test(last) || last === ')')){
+        v = '×(';
+      }
+
+      if(isOp(v) && isOp(last)) {
+        // allow '(' then '-' (unary minus)
+        if(last === '(' && v === '-') {
+          setScreen(t + v);
+          return;
+        }
+        setScreen(t.slice(0,-1) + v);
+        return;
+      }
+
+      if(v === '.') {
+        const part = t.split(/[\+\-×÷()]/).pop();
+        if(part.includes('.')) return;
+      }
+
+      if(v === ')'){
+        const open = (t.match(/\(/g) || []).length;
+        const close = (t.match(/\)/g) || []).length;
+        if(open <= close) return; 
+        if(isOp(last) || last === '(') return;
+      }
+
+      setScreen(t + v);
+    }
+
+    function clearAll(){
+      historyEl.textContent = '';
+      setScreen('0');
+    }
+
+    function del(){
+      const t = getText();
+      setScreen(t.length > 1 ? t.slice(0,-1) : '0');
+    }
+
+    function calc(){
+      let exprPretty = getText();
+      let expr = prettyToRaw(exprPretty);
+
+      if(isOp(exprPretty.slice(-1))){
+        exprPretty = exprPretty.slice(0,-1);
+        expr = prettyToRaw(exprPretty);
+      }
+
+      const open = (expr.match(/\(/g) || []).length;
+      const close = (expr.match(/\)/g) || []).length;
+      const diff = open - close;
+      if(diff > 0){
+        expr += ')'.repeat(diff);
+        exprPretty = exprPretty + ')'.repeat(diff);
+      }
+
+      try{
+        const result = Function(`"use strict"; return (${expr})`)();
+        if (result === Infinity || Number.isNaN(result)) throw new Error('Inválido');
+        historyEl.textContent = exprPretty + ' =';
+        setScreen(format(result));
+      }catch{
+        flash();
+      }
+    }
+
+    function format(n){
+      const r = Math.round(n * 100) / 100;
+      const s = r.toString();
+      const [int, dec=''] = s.split('.');
+      const intFmt = int.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+      return dec ? `${intFmt}.${dec}` : intFmt;
+    }
+
+    function flash(){
+      screen.classList.add('shake');
+      setTimeout(()=>screen.classList.remove('shake'),250);
+    }
+
+    keys.addEventListener('click', e=>{
+      const b = e.target.closest('button'); if(!b) return;
+      const v = b.dataset.val;
+      const act = b.dataset.act;
+      if(v) addValue(v);
+      else if(act==='ac') clearAll();
+      else if(act==='del') del();
+      else if(act==='eq') calc();
+    });
+
+    window.addEventListener('keydown', e=>{
+      const k = e.key;
+      if(/\d/.test(k)) addValue(k);
+      else if(k==='.') addValue('.');
+      else if(k==='+'||k==='-') addValue(k);
+      else if(k==='*') addValue('×');
+      else if(k==='/') addValue('÷');
+      else if(k==='(') addValue('(');
+      else if(k===')') addValue(')');
+      else if(k==='Enter' || k==='='){ e.preventDefault(); calc(); }
+      else if(k==='Backspace'){ del(); }
+      else if(k==='Escape'){ clearAll(); }
+    });
+  </script>
+</body>
+</html>
